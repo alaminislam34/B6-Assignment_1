@@ -1,5 +1,6 @@
-type ValueType = string | number | boolean;
-const formatValue = (value: ValueType): ValueType => {
+const formatValue = (
+  value: string | number | boolean
+): string | number | boolean => {
   if (typeof value === "string") {
     return value.toLocaleUpperCase();
   } else if (typeof value === "number") {
@@ -9,8 +10,7 @@ const formatValue = (value: ValueType): ValueType => {
   }
 };
 
-type isArrayOrString = string | any[];
-const getLength = (value: isArrayOrString): number => {
+const getLength = (value: string | any[]): number => {
   if (typeof value === "string") {
     return value.length;
   } else {
@@ -29,25 +29,18 @@ class Person {
   }
 }
 
-type Item = {
-  title: string;
-  rating: number;
-};
-const filterByRating = (arr: Item[]): Item[] => {
+const filterByRating = (
+  arr: { title: string; rating: number }[]
+): { title: string; rating: number }[] => {
   const filetArray = arr
     .filter((item) => item.rating >= 4)
     .map((item) => ({ ...item, rating: Number(item.rating.toFixed(1)) }));
   return filetArray;
 };
 
-type User = {
-  id: number;
-  name: string;
-  email: string;
-  isActive: boolean;
-};
-
-const filterActiveUsers = (arr: User[]): User[] => {
+const filterActiveUsers = (
+  arr: { id: number; name: string; email: string; isActive: boolean }[]
+): { id: number; name: string; email: string; isActive: boolean }[] => {
   return arr.filter((user) => user.isActive);
 };
 
@@ -69,7 +62,12 @@ const printBookDetails = (obj: Book) => {
 
 const getUniqueValues = (arr1: number[], arr2: number[]): number[] => {
   const uniqueValues: number[] = [];
-  for (const value of [...arr1, ...arr2]) {
+  for (const value of arr1) {
+    if (!uniqueValues.includes(value)) {
+      uniqueValues.push(value);
+    }
+  }
+  for (const value of arr2) {
     if (!uniqueValues.includes(value)) {
       uniqueValues.push(value);
     }
@@ -78,13 +76,14 @@ const getUniqueValues = (arr1: number[], arr2: number[]): number[] => {
   return uniqueValues;
 };
 
-type Product = {
-  name: string;
-  price: number;
-  quantity: number;
-  discount?: number;
-};
-const calculateTotalPrice = (arr: Product[]): number => {
+const calculateTotalPrice = (
+  arr: {
+    name: string;
+    price: number;
+    quantity: number;
+    discount?: number;
+  }[]
+): number => {
   let totalPrice = 0;
   for (const product of arr) {
     const discountAmount = (product.price * (product.discount ?? 0)) / 100;
@@ -93,4 +92,3 @@ const calculateTotalPrice = (arr: Product[]): number => {
   }
   return totalPrice;
 };
-
