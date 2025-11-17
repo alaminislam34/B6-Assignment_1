@@ -32,16 +32,35 @@ class Person {
 const filterByRating = (
   arr: { title: string; rating: number }[]
 ): { title: string; rating: number }[] => {
-  const filetArray = arr
-    .filter((item) => item.rating >= 4)
-    .map((item) => ({ ...item, rating: Number(item.rating.toFixed(1)) }));
+  const filetArray: { title: string; rating: number }[] = [];
+  for (let i = 0; i < arr.length; i++) {
+    const item = arr[i];
+    if (item.rating >= 4) {
+      filetArray[filetArray.length] = {
+        title: item.title,
+        rating: Number(item.rating.toFixed(1)),
+      };
+    }
+  }
   return filetArray;
 };
 
 const filterActiveUsers = (
   arr: { id: number; name: string; email: string; isActive: boolean }[]
 ): { id: number; name: string; email: string; isActive: boolean }[] => {
-  return arr.filter((user) => user.isActive);
+  const activeUsers: {
+    id: number;
+    name: string;
+    email: string;
+    isActive: boolean;
+  }[] = [];
+  for (let i = 0; i < arr.length; i++) {
+    const user = arr[i];
+    if (user.isActive) {
+      activeUsers[activeUsers.length] = user;
+    }
+  }
+  return activeUsers;
 };
 
 interface Book {
@@ -64,12 +83,12 @@ const getUniqueValues = (arr1: number[], arr2: number[]): number[] => {
   const uniqueValues: number[] = [];
   for (const value of arr1) {
     if (!uniqueValues.includes(value)) {
-      uniqueValues.push(value);
+      uniqueValues[uniqueValues.length] = value;
     }
   }
   for (const value of arr2) {
     if (!uniqueValues.includes(value)) {
-      uniqueValues.push(value);
+      uniqueValues[uniqueValues.length] = value;
     }
   }
 
