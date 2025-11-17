@@ -25,11 +25,9 @@ class Person {
     (this.name = name), (this.age = age);
   }
   getDetails() {
-    return `Name: ${this.name}, Age: ${this.age}`;
+    return console.log(`'Name: ${this.name}, Age: ${this.age}'`);
   }
 }
-const person1: Person = new Person("John", 23);
-const person2: Person = new Person("Don", 21);
 
 type Item = {
   title: string;
@@ -63,9 +61,9 @@ interface Book {
 const printBookDetails = (obj: Book) => {
   const { title, author, publishedYear, isAvailable } = obj;
   console.log(
-    `Title: ${title}, Author: ${author}, Published: ${publishedYear}, Available: ${
+    `"Title: ${title}, Author: ${author}, Published: ${publishedYear}, Available: ${
       isAvailable ? "Yes" : "No"
-    }`
+    }"`
   );
 };
 
@@ -95,3 +93,4 @@ const calculateTotalPrice = (arr: Product[]): number => {
   }
   return totalPrice;
 };
+
