@@ -28,13 +28,13 @@ class Person {
     return `Name: ${this.name}, Age: ${this.age}`;
   }
 }
+const person1: Person = new Person("John", 23);
+const person2: Person = new Person("Don", 21);
 
 type Item = {
   title: string;
   rating: number;
 };
-
-//  todo
 const filterByRating = (arr: Item[]): Item[] => {
   const filetArray = arr
     .filter((item) => item.rating >= 4)
@@ -70,7 +70,13 @@ const printBookDetails = (obj: Book) => {
 };
 
 const getUniqueValues = (arr1: number[], arr2: number[]): number[] => {
-  const uniqueValues = [...new Set([...arr1, ...arr2])];
+  const uniqueValues: number[] = [];
+  for (const value of [...arr1, ...arr2]) {
+    if (!uniqueValues.includes(value)) {
+      uniqueValues.push(value);
+    }
+  }
+
   return uniqueValues;
 };
 
@@ -83,7 +89,9 @@ type Product = {
 const calculateTotalPrice = (arr: Product[]): number => {
   let totalPrice = 0;
   for (const product of arr) {
-    totalPrice = totalPrice + product.price * product.quantity;
+    const discountAmount = (product.price * (product.discount ?? 0)) / 100;
+    totalPrice =
+      totalPrice + (product.price - discountAmount) * product.quantity;
   }
   return totalPrice;
 };
